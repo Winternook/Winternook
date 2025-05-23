@@ -5,10 +5,13 @@
   <title>🌒 Winternook Chronicles</title>
   <style>
     body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f0f0f0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
     }
     header {
       background: #2b2d42;
@@ -63,9 +66,19 @@
   </nav>
 
   <div class="section" id="daily">
-    <h2>✨ My marvellous daily life</h2>
-    <textarea id="text-daily" placeholder="Raconte ta journée magique..."></textarea>
+  <h2>✨ My marvellous daily life</h2>
+
+  <div class="subsection">
+    <h3>🗓 23 mai 2025</h3>
+    <textarea id="daily-2025-05-23" placeholder="Ce que tu as vécu aujourd’hui..."></textarea>
   </div>
+
+  <div class="subsection">
+    <h3>🗓 22 mai 2025</h3>
+    <textarea id="daily-2025-05-22" placeholder="Tes souvenirs de la veille..."></textarea>
+  </div>
+</div>
+
 
   <div class="section" id="games">
     <h2>🎮 Games</h2>
@@ -91,13 +104,22 @@
     }
 
     // Sauvegarde automatique
-    ['daily', 'games', 'dreams', 'signs'].forEach(key => {
-      const area = document.getElementById('text-' + key);
-      area.value = localStorage.getItem('text-' + key) || '';
-      area.addEventListener('input', () => {
-        localStorage.setItem('text-' + key, area.value);
-      });
+   [
+  'daily-2025-05-23',
+  'daily-2025-05-22',
+  'games',
+  'dreams',
+  'signs'
+].forEach(key => {
+  const area = document.getElementById('text-' + key) || document.getElementById(key);
+  if (area) {
+    area.value = localStorage.getItem('text-' + key) || '';
+    area.addEventListener('input', () => {
+      localStorage.setItem('text-' + key, area.value);
     });
+  }
+});
+
 
     // Afficher la première section au démarrage
     showSection('daily');
